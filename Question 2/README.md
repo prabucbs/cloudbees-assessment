@@ -15,10 +15,17 @@ Run an Nginx application using yaml file.
 ###### Steps for running Nginx application using yaml file
 
 1. Created nginx-deployment.yaml in home folder
+
 2. kubectl apply -f nginx-deployment.yaml
+
 3. kubectl expose deployment nginx-deployment --type=NodePort --port=80
-4. kubectl get svc nginx-deploymentNAME                       TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)            AGE
-   nginx-deployment   NodePort   10.111.109.236   `<none>`              80:30998/TCP   18m
+
+4. kubectl get svc nginx-deployment
+
+```
+NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)            AGE
+nginx-deployment           NodePort       10.111.109.236   `<none>`      80:30998/TCP       18m
+```
 
 So by executing above steps I was able to do a basic deployment of nginx image.
 
@@ -43,10 +50,16 @@ $ ./get_helm.sh
 7. Deleted the deployment previously created to perfom deployment via helm charts
 8. Run "helm install my-nginx nginx-chart"
 9. kubectl get pods - to view the pod created via helm chart
-10. NAME                                                      READY   STATUS    RESTARTS   AGE
-    nginx-deployment-544dc8b7c4-n9wml   1/1     Running            0          57m
-11. kubectl get svc nginx-service
-    NAME                TYPE         CLUSTER-IP     EXTERNAL-IP   PORT(S)           AGE
-    nginx-service   NodePort   10.104.47.52   `<none>`               80:30462/TCP   54m
-12. helm upgrade my-nginx nginx-chart -> you can use this command to reinstall or update if you are making any changes
-13. helm install my-nginx nginx-chart -f values.yaml -> you can use this command if you want to specify which values file to choose for deployment
+
+   ```
+   NAME                               READY   STATUS    RESTARTS   AGE
+   nginx-deployment-544dc8b7c4-n9wml   1/1    Running    0          57m
+   ```
+10. kubectl get svc nginx-service
+
+    ```
+      NAME                TYPE         CLUSTER-IP     EXTERNAL-IP   PORT(S)           AGE
+      nginx-service       NodePort   10.104.47.52      `<none>`     80:30462/TCP      54m
+    ```
+11. helm upgrade my-nginx nginx-chart -> you can use this command to reinstall or update if you are making any changes
+12. helm install my-nginx nginx-chart -f values.yaml -> you can use this command if you want to specify which values file to choose for deployment
